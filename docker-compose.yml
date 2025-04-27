@@ -1,0 +1,21 @@
+version: "3.8"
+name: scout_service
+
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://api:3000
+    command: npm run dev
+    networks:
+      - scout_service_scout-network
+
+networks:
+  scout_service_scout-network:
+    external: true
