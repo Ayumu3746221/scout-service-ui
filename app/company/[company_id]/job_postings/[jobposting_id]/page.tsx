@@ -7,6 +7,7 @@ import { CompanyByIdFeatcher } from "@/domain/fetcher/companyFetcher";
 import Link from "next/link";
 import { JobPostingCard } from "@/components/job_posting/JobPostingCard";
 import { CompanyDescriptionCard } from "@/components/job_posting/CompanyDescriptionCard";
+import { Header } from "@/components/layout/Header";
 
 export default async function JobDetailPage({
   params,
@@ -48,43 +49,48 @@ export default async function JobDetailPage({
 
   if (error || !jobPosting || !company) {
     return (
-      <div className="min-h-screen">
-        <main className="container py-8">
-          <div className="text-center py-12">
-            <h2 className="text-2xl font-bold mb-4">エラー</h2>
-            <p className="text-muted-foreground">
-              {error || "募集情報が見つかりませんでした"}
-            </p>
-            <Button className="mt-4">トップページに戻る</Button>
-          </div>
-        </main>
-      </div>
+      <>
+        <Header />
+        <div className="min-h-screen">
+          <main className="container py-8">
+            <div className="text-center py-12">
+              <h2 className="text-2xl font-bold mb-4">エラー</h2>
+              <p className="text-muted-foreground">
+                {error || "募集情報が見つかりませんでした"}
+              </p>
+              <Button className="mt-4">トップページに戻る</Button>
+            </div>
+          </main>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className="min-h-screen">
-      <main className="container py-8 w-[90%] mx-auto">
-        <div className="mb-6">
-          <Link href={"/"} className="flex items-center gap-1">
-            <ArrowLeft className="h-4 w-4" />
-            戻る
-          </Link>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="lg:col-span-2 space-y-6">
-            <JobPostingCard
-              companyName={company.name}
-              jobPosting={jobPosting}
-            />
+    <>
+      <div className="min-h-screen">
+        <main className="container py-8 w-[90%] mx-auto">
+          <div className="mb-6">
+            <Link href={"/"} className="flex items-center gap-1">
+              <ArrowLeft className="h-4 w-4" />
+              戻る
+            </Link>
           </div>
 
-          <div>
-            <CompanyDescriptionCard {...company} />
+          <div className="grid gap-6 lg:grid-cols-3">
+            <div className="lg:col-span-2 space-y-6">
+              <JobPostingCard
+                companyName={company.name}
+                jobPosting={jobPosting}
+              />
+            </div>
+
+            <div>
+              <CompanyDescriptionCard {...company} />
+            </div>
           </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }
