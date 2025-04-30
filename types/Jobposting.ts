@@ -21,3 +21,7 @@ export interface JobPosting {
 export interface JobPostingsResponse {
   job_postings: JobPosting[];
 }
+
+export interface JobPostingResponse {
+  job_posting: JobPosting;
+}

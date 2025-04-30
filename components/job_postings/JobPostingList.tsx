@@ -2,6 +2,7 @@ import { JobPosting } from "@/types/Jobposting";
 import { jobPostingFetcher } from "@/domain/fetcher/jobPostingFetcher";
 import JobPostingList_Loading from "./JobPostingList_Loading";
 import JobPostingListItem from "./JobPostingListItem";
+import Link from "next/link";
 
 export async function JobPostingList() {
   let jobPostings: JobPosting[] = [];
@@ -37,7 +38,12 @@ export async function JobPostingList() {
   return (
     <div className="space-y-6">
       {jobPostings.map((job) => (
-        <JobPostingListItem key={job.id} {...job} />
+        <Link
+          href={`/company/${job.company_id}/job_postings/${job.id}`}
+          key={job.id}
+        >
+          <JobPostingListItem key={job.id} {...job} />
+        </Link>
       ))}
     </div>
   );
