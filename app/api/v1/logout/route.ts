@@ -1,4 +1,4 @@
-import TokenManager from "@/utils/TokenManager";
+import TokenManager from "@/utils/token/TokenManager";
 import { NextResponse } from "next/server";
 
 export async function DELETE() {
