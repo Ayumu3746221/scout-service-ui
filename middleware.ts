@@ -2,7 +2,8 @@ import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const protecedPaths = ["/api/v1/auth", "/api/v1/logout"];
+  const url = request.nextUrl.clone();
+  const protecedPaths = ["/api/v1/auth", "/api/v1/logout", "/profile/edit"];
 
   const isProtectedPath = protecedPaths.some((path) =>
     request.nextUrl.pathname.startsWith(path),
@@ -12,7 +13,8 @@ export function middleware(request: NextRequest) {
     const token = request.cookies.get("token")?.value;
 
     if (!token) {
-      redirect("/login");
+      url.pathname = "/login";
+      return NextResponse.redirect(url);
     }
   }
 

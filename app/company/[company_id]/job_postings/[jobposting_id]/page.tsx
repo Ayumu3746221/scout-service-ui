@@ -18,7 +18,6 @@ export default async function JobDetailPage({
   let jobPosting: JobPosting | null = null;
   let company: Company | null = null;
   let error: string | null = null;
-  let isLoading = true;
 
   try {
     const response_jobPsting = await jobPostingByIdFetcher(jobposting_id);
@@ -29,22 +28,6 @@ export default async function JobDetailPage({
   } catch (error) {
     console.error("Error fetching job posting or company:", error);
     error = "求人情報の取得に失敗しました";
-  } finally {
-    isLoading = false;
-  }
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen">
-        <main className="container py-8">
-          <div className="animate-pulse space-y-4">
-            <div className="h-8 w-3/4 bg-muted rounded"></div>
-            <div className="h-4 w-1/2 bg-muted rounded"></div>
-            <div className="h-64 bg-muted rounded"></div>
-          </div>
-        </main>
-      </div>
-    );
   }
 
   if (error || !jobPosting || !company) {
