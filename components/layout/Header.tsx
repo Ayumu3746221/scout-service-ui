@@ -51,6 +51,15 @@ export async function Header() {
                 </Link>
               </Button>
 
+              {user.role === "recruiter" && (
+                <Button variant="ghost" size="icon" asChild>
+                  <Link href="/job-postings">
+                    <Briefcase className="h-5 w-5" />
+                    <span className="sr-only">求人一覧</span>
+                  </Link>
+                </Button>
+              )}
+
               {user.role === "student" ? (
                 <Button variant="ghost" size="icon" asChild>
                   <Link href={`/student/${user.id}`}>
@@ -60,7 +69,7 @@ export async function Header() {
                 </Button>
               ) : (
                 <Button variant="ghost" size="icon" asChild>
-                  <Link href="/company/profile">
+                  <Link href={`/company/profile/${user.company}`}>
                     <Building2 className="h-5 w-5" />
                     <span className="sr-only">企業プロフィール</span>
                   </Link>

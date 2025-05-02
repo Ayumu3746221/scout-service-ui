@@ -5,7 +5,6 @@ import { studentProfileFetcher } from "@/domain/fetcher/studentProfileFetcher";
 import { getUser } from "@/domain/user/getUser";
 import { IndustriesResponse } from "@/types/Industry";
 import { SkillsResponse } from "@/types/Skill";
-import StudentProfile from "@/types/StudentProfile";
 
 export default async function EditProfilePage() {
   const currentUser = await getUser();
