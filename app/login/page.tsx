@@ -25,7 +25,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Briefcase, Loader2 } from "lucide-react";
-import { Header } from "@/components/layout/Header";
 
 const formSchema = z.object({
   email: z

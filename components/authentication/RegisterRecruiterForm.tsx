@@ -34,7 +34,7 @@ import {
 import { Briefcase, Loader2, GraduationCap } from "lucide-react";
 import { IndustriesResponse } from "@/types/Industry";
 
-interface RegisterRecruiterForm {
+interface RegisterRecruiterFormProps {
   industries: IndustriesResponse;
 }
 
@@ -68,7 +68,7 @@ const recruiterFormSchema = z
 
 export default function RegisterRecruiterForm({
   industries,
-}: RegisterRecruiterForm) {
+}: RegisterRecruiterFormProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 

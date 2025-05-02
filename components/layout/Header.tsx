@@ -53,7 +53,7 @@ export async function Header() {
 
               {user.role === "student" ? (
                 <Button variant="ghost" size="icon" asChild>
-                  <Link href="/profile">
+                  <Link href={`/student/${user.id}`}>
                     <User className="h-5 w-5" />
                     <span className="sr-only">プロフィール</span>
                   </Link>
