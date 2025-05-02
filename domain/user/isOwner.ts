@@ -9,5 +9,8 @@ export function isOwner(
     return false;
   }
 
-  return currentUser.role === requiredRole && currentUser.id === targetId;
+  return (
+    currentUser.role === requiredRole &&
+    (currentUser.id === targetId || currentUser.company === targetId)
+  );
 }
