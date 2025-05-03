@@ -20,6 +20,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Link from "next/link";
+import NewMessageButton from "../NewMessageButton";
 
 interface StudentProfileProps {
   profile: StudentProfileType;
@@ -80,10 +81,7 @@ export default async function StudentProfile({
                 )}
 
                 {isRecruiter && (
-                  <Button className="w-full">
-                    <MessageSquare className="mr-2 h-4 w-4" />
-                    メッセージを送る
-                  </Button>
+                  <NewMessageButton receiver_id={profile.user_id} />
                 )}
               </CardFooter>
             </Card>

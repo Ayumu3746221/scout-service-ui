@@ -9,8 +9,8 @@ import {
 } from "../ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Building2 } from "lucide-react";
-import { Button } from "../ui/button";
 import { JobPosting } from "@/types/Jobposting";
+import ApplyButton from "./ApplyButton";
 
 interface JobPostingCardProps {
   companyName: string;
@@ -68,9 +68,7 @@ export const JobPostingCard = ({
         </div>
       </CardContent>
       <CardFooter>
-        <Button size="lg" className="w-full sm:w-auto">
-          応募する
-        </Button>
+        <ApplyButton jobPostingId={jobPosting.id.toString()} />
       </CardFooter>
     </Card>
   );
