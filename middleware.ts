@@ -3,7 +3,12 @@ import { getUser } from "./domain/user/getUser";
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
-  const protecedPaths = ["/api/v1/auth", "/api/v1/logout", "/profile/edit"];
+  const protecedPaths = [
+    "/api/v1/auth",
+    "/api/v1/logout",
+    "/profile/edit",
+    "/job-postings",
+  ];
   const requiredRecruiterPath = ["/company/profile"];
 
   const isProtectedPath = protecedPaths.some((path) =>
