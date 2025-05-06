@@ -1,9 +1,8 @@
-import TokenManager from "@/utils/token/TokenManager";
+import { getToken } from "@/domain/token/getToken";
 import { NextResponse } from "next/server";
 
 export async function DELETE() {
-  const tokenManager = TokenManager.getInstance();
-  const token = await tokenManager.getToken();
+  const token = await getToken();
 
   try {
     const backendResponse = await fetch(
@@ -30,7 +29,6 @@ export async function DELETE() {
 
     response.cookies.delete("token");
     response.cookies.delete("user");
-    tokenManager.resetToken();
 
     return response;
   } catch (error) {

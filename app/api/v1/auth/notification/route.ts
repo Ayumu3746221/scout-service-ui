@@ -1,8 +1,8 @@
-import TokenManager from "@/utils/token/TokenManager";
+import { getToken } from "@/domain/token/getToken";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-  const token = await TokenManager.getInstance().getToken();
+  const token = await getToken();
 
   try {
     const response = await fetch(
