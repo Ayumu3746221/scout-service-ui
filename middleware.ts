@@ -1,41 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getUser } from "./domain/user/getUser";
 
-export async function middleware(request: NextRequest) {
-  const url = request.nextUrl.clone();
-  const protecedPaths = [
-    "/api/v1/auth",
+export const config = {
+  matcher: [
+    "/api/v1/auth/:path*",
     "/api/v1/logout",
     "/profile/edit",
     "/job-postings",
-  ];
-  const requiredRecruiterPath = ["/company/profile"];
+    "/company/profile",
+  ],
+};
 
-  const isProtectedPath = protecedPaths.some((path) =>
-    request.nextUrl.pathname.startsWith(path),
-  );
+export const middleware = async (request: NextRequest) => {
+  const token = request.cookies.get("token")?.value;
 
-  const isRequiredRecruiterPath = requiredRecruiterPath.some((path) =>
-    request.nextUrl.pathname.startsWith(path),
-  );
-
-  if (isProtectedPath || isRequiredRecruiterPath) {
-    const token = request.cookies.get("token")?.value;
-
-    if (!token) {
-      url.pathname = "/login";
-      return NextResponse.redirect(url);
-    }
+  if (!token) {
+    return new NextResponse(JSON.stringify({ message: "Unauthorized" }), {
+      status: 401,
+    });
   }
 
-  if (isRequiredRecruiterPath) {
-    const user = await getUser();
-
-    if (!user?.company) {
-      url.pathname = "/login";
-      return NextResponse.redirect(url);
-    }
-  }
-
+  console.log("Token found, proceeding to next middleware");
   return NextResponse.next();
-}
+};

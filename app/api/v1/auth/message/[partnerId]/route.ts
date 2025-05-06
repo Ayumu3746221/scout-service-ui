@@ -1,13 +1,13 @@
+import { getToken } from "@/domain/token/getToken";
 import { MessagesResponse } from "@/types/Message";
-import TokenManager from "@/utils/token/TokenManager";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { partnerId: string } },
 ) {
-  const { partnerId } = await params;
-  const token = await TokenManager.getInstance().getToken();
+  const { partnerId } = params;
+  const token = await getToken();
 
   try {
     const response = await fetch(
